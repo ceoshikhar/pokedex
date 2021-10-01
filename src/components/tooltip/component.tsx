@@ -14,17 +14,18 @@ interface TooltipOptions extends TooltipProps {
  * The first child of `Tooltip` must be a raw DOM Element. A custom component
  * as the first child will cause bugs.
  */
-export function Tooltip({
+export const Tooltip = ({
     children,
     color,
     background,
     ...rest
-}: TooltipOptions) {
+}: TooltipOptions) => {
     const theme = useTheme();
 
     const StyledTooltip = withStyles({
         tooltip: {
-            fontFamily: 'Roboto',
+            fontFamily: 'Inter',
+            fontWeight: 400,
             fontSize: '1rem',
             background: background || theme.color.borderOnDisabled,
             color: color || theme.color.textPrimary,
@@ -34,4 +35,4 @@ export function Tooltip({
     })(MUITooltip);
 
     return <StyledTooltip {...rest}>{children}</StyledTooltip>;
-}
+};
