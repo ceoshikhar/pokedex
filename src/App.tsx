@@ -3,11 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Sidebar } from '@/features/sidebar';
-import { LoadingScreen } from './features/loading-screen';
+import { LoadingScreen } from '@/features/loading-screen';
 
 // This code splitting provides no real benefits but it's a good practice.
 const HomeRoute = lazy(() => import('@/features/home-route'));
 const SearchRoute = lazy(() => import('@/features/search-route'));
+const NotFoundRoute = lazy(() => import('@/features/not-found-route'));
 
 export const App: React.FC = () => {
     return (
@@ -16,17 +17,17 @@ export const App: React.FC = () => {
                 <SidebarContainer>
                     <Sidebar />
                 </SidebarContainer>
+
                 <DashboardContainer>
-                    <Switch>
-                        <Suspense fallback={<LoadingScreen />}>
-                            <Route path="/" exact component={HomeRoute} />
-                            <Route
-                                path="/search"
-                                exact
-                                component={SearchRoute}
-                            />
-                        </Suspense>
-                    </Switch>
+                    <Suspense fallback={<LoadingScreen />}>
+                        <Switch>
+                            <Route exact path="/" component={HomeRoute} />
+
+                            <Route path="/search" component={SearchRoute} />
+
+                            <Route component={NotFoundRoute} />
+                        </Switch>
+                    </Suspense>
                 </DashboardContainer>
             </Layout>
         </BrowserRouter>
