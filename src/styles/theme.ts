@@ -1,34 +1,45 @@
-import { createTheme } from '@mui/material/styles';
+interface Color {
+    background: string;
+    background2: string;
+    background3: string;
+    brightBlue: string;
+    borderOnDisabled: string;
+    disabled: string;
+    error: string;
+    onDisabled: string;
+    onPrimary: string;
+    onPrimaryHover: string;
+    primary: string;
+    secondary: string;
+    success: string;
+    textAlter: string;
+    textFaded: string;
+    textPrimary: string;
+}
 
-const headingStyles = {
-    fontFamily: 'Inter',
-    fontWeight: 700,
+export interface Theme {
+    name: 'dark';
+    color: Color;
+}
+
+export const darkTheme: Theme = {
+    name: 'dark',
+    color: {
+        background: '#00171F',
+        background2: '#003459',
+        background3: '#003F6B',
+        brightBlue: '#8ECAE6',
+        borderOnDisabled: '#0066AE',
+        disabled: '#00477A',
+        error: '#FF5252',
+        onDisabled: '#A0A0A0',
+        onPrimary: '#FFFFFF',
+        onPrimaryHover: '#1484CF',
+        primary: '#3498DB',
+        secondary: '#FFB703',
+        success: '#0AD48B',
+        textAlter: '#040F0F',
+        textPrimary: '#F1F1F1',
+        textFaded: '#979797',
+    },
 };
-
-export const theme = createTheme({
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: '#FFB703',
-        },
-        secondary: {
-            main: '#00A8E8',
-        },
-        contrastThreshold: 3,
-        tonalOffset: 0.2,
-    },
-    typography: {
-        fontFamily: ['Roboto', 'Inter'].join(','),
-        htmlFontSize: 16,
-        h1: headingStyles,
-        h2: headingStyles,
-        h3: headingStyles,
-        h4: headingStyles,
-        h5: headingStyles,
-        h6: headingStyles,
-        button: {
-            fontFamily: 'Inter',
-            fontWeight: 700,
-        },
-    },
-});

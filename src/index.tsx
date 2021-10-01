@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme } from '@/styles/theme';
 import { App } from './App';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { theme } from './styles/theme';
+import GlobalStyle from '@/styles/global-style';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <ThemeProvider theme={darkTheme}>
+            <GlobalStyle />
             <App />
         </ThemeProvider>
     </React.StrictMode>,
