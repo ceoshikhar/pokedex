@@ -1,47 +1,48 @@
 import styled from 'styled-components';
 import { SidebarIcon } from './components/sidebar-icon';
 import { Tooltip } from '@/components/tooltip';
-import { IconHome, IconSearch } from '@/components/icons';
+import { IconFavorite, IconPokemon } from '@/components/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 
 export const Sidebar: React.FC = () => {
     const history = useHistory();
     const location = useLocation();
 
-    const onHomeRoute = location.pathname === '/';
-    const onSearchRoute = location.pathname === '/search';
+    const onPokedexRoute = location.pathname === '/';
+    const onFavoritesRoute = location.pathname === '/favorites';
 
-    const goToHomeRoute = () => !onHomeRoute && history.push('/');
-    const goToSearchRoute = () => !onSearchRoute && history.push('/search');
+    const goToPokedexRoute = () => !onPokedexRoute && history.push('/');
+    const goToFavoritesRoute = () =>
+        !onFavoritesRoute && history.push('/favorites');
 
     return (
         <Container>
             <Tooltip
-                title="Home"
+                title="Pokédex"
                 placement="right"
-                enterDelay={1000}
-                disableHoverListener={onHomeRoute}
+                enterDelay={500}
+                disableHoverListener={onPokedexRoute}
             >
                 <i>
                     <SidebarIcon
-                        icon={IconHome}
-                        active={onHomeRoute}
-                        onClick={goToHomeRoute}
+                        icon={IconPokemon}
+                        active={onPokedexRoute}
+                        onClick={goToPokedexRoute}
                     />
                 </i>
             </Tooltip>
 
             <Tooltip
-                title="Search"
+                title="Favorites"
                 placement="right"
-                enterDelay={1000}
-                disableHoverListener={onSearchRoute}
+                enterDelay={500}
+                disableHoverListener={onFavoritesRoute}
             >
                 <i>
                     <SidebarIcon
-                        icon={IconSearch}
-                        active={onSearchRoute}
-                        onClick={goToSearchRoute}
+                        icon={IconFavorite}
+                        active={onFavoritesRoute}
+                        onClick={goToFavoritesRoute}
                     />
                 </i>
             </Tooltip>

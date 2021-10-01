@@ -18,6 +18,7 @@ export const Tooltip = ({
     children,
     color,
     background,
+    style,
     ...rest
 }: TooltipOptions) => {
     const theme = useTheme();
@@ -31,6 +32,7 @@ export const Tooltip = ({
             color: color || theme.color.textPrimary,
             borderRadius: '6px',
             padding: '4px 8px',
+            ...style,
         },
     })(MUITooltip);
 

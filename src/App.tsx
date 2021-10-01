@@ -6,8 +6,8 @@ import { Sidebar } from '@/features/sidebar';
 import { LoadingScreen } from '@/features/loading-screen';
 
 // This code splitting provides no real benefits but it's a good practice.
-const HomeRoute = lazy(() => import('@/features/home-route'));
-const SearchRoute = lazy(() => import('@/features/search-route'));
+const PokedexRoute = lazy(() => import('@/features/pokedex-route'));
+const FavoritesRoute = lazy(() => import('@/features/favorites-route'));
 const NotFoundRoute = lazy(() => import('@/features/not-found-route'));
 
 export const App: React.FC = () => {
@@ -21,9 +21,12 @@ export const App: React.FC = () => {
                 <DashboardContainer>
                     <Suspense fallback={<LoadingScreen />}>
                         <Switch>
-                            <Route exact path="/" component={HomeRoute} />
+                            <Route exact path="/" component={PokedexRoute} />
 
-                            <Route path="/search" component={SearchRoute} />
+                            <Route
+                                path="/favorites"
+                                component={FavoritesRoute}
+                            />
 
                             <Route component={NotFoundRoute} />
                         </Switch>

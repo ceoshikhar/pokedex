@@ -7,5 +7,6 @@ export const Subtitle: React.FC<Props> = ({ children, ...props }: Props) => (
 );
 
 const StyledParagraph = styled.p`
-    font-size: 0.75rem;
+    font-family: 'Inter';
+    font-size: 0.85rem;
 `;
