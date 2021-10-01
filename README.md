@@ -1,1 +1,1 @@
-# Pokedex for Edvora
+# Pokédex

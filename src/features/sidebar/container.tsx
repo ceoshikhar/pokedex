@@ -52,7 +52,7 @@ export const Sidebar: React.FC = () => {
 const Container = styled.div`
     width: 86px;
     height: 100vh;
-    padding: 28px 0;
+    padding: 1.5rem 0;
     position: sticky;
     top: 0px;
     left: 0px;
