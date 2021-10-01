@@ -1,7 +1,8 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Sidebar } from '@/features/sidebar';
+import { HomeRoute } from './features/home-route';
 
 export const App: React.FC = () => {
     return (
@@ -10,7 +11,11 @@ export const App: React.FC = () => {
                 <SidebarContainer>
                     <Sidebar />
                 </SidebarContainer>
-                <DashboardContainer></DashboardContainer>
+                <DashboardContainer>
+                    <Switch>
+                        <Route path="/" exact component={HomeRoute} />
+                    </Switch>
+                </DashboardContainer>
             </Layout>
         </BrowserRouter>
     );
