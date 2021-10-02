@@ -18,12 +18,10 @@ interface Color {
 }
 
 export interface Theme {
-    name: 'dark';
     color: Color;
 }
 
-export const darkTheme: Theme = {
-    name: 'dark',
+export const theme: Theme = {
     color: {
         background: '#00171F',
         background2: '#003459',

@@ -1,14 +1,15 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { Sidebar } from '@/features/sidebar';
 import { LoadingScreen } from '@/features/loading-screen';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
-const PokedexRoute = lazy(() => import('@/features/pokedex-route'));
-const FavoritesRoute = lazy(() => import('@/features/favorites-route'));
-const NotFoundRoute = lazy(() => import('@/features/not-found-route'));
+const Pokedex = lazy(() => import('@/features/pokedex'));
+const Favorites = lazy(() => import('@/features/favorites'));
+const NotFound = lazy(() => import('@/features/not-found'));
 
 const queryClient = new QueryClient();
 
@@ -27,20 +28,23 @@ export const App: React.FC = () => {
                                 <Route
                                     exact
                                     path="/"
-                                    component={PokedexRoute}
+                                    component={() => <Redirect to="pokedex" />}
                                 />
+
+                                <Route path="/pokedex" component={Pokedex} />
 
                                 <Route
                                     path="/favorites"
-                                    component={FavoritesRoute}
+                                    component={Favorites}
                                 />
 
-                                <Route component={NotFoundRoute} />
+                                <Route component={NotFound} />
                             </Switch>
                         </Suspense>
                     </DashboardContainer>
                 </Layout>
             </BrowserRouter>
+            <ReactQueryDevtools />
         </QueryClientProvider>
     );
 };

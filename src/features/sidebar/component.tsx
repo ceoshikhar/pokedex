@@ -9,7 +9,7 @@ export const Sidebar: React.FC = () => {
     const history = useHistory();
     const location = useLocation();
 
-    const onPokedexRoute = location.pathname === '/';
+    const onPokedexRoute = location.pathname.startsWith('/pokedex');
     const onFavoritesRoute = location.pathname === '/favorites';
 
     const goToPokedexRoute = () => !onPokedexRoute && history.push('/');

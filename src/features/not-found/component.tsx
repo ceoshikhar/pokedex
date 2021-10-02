@@ -3,7 +3,7 @@ import { Title } from '@/components/title';
 import { Subtitle } from '@/components/subtitle';
 import styled from 'styled-components';
 
-export const NotFoundRoute: React.FC = () => {
+export const NotFound: React.FC = () => {
     return (
         <Container>
             <div>

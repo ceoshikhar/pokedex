@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Title } from '@/components/title';
 import { Subtitle } from '@/components/subtitle';
 
-export const FavoritesRoute: React.FC = () => {
+export const Favorites: React.FC = () => {
     return (
         <MainContainer>
             <Title style={{ marginBottom: '0.5rem' }}>Favorites</Title>
