@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Tooltip as MUITooltip,
     withStyles,
@@ -5,7 +6,7 @@ import {
 } from '@material-ui/core';
 import { useTheme } from 'styled-components';
 
-interface TooltipOptions extends TooltipProps {
+interface Props extends TooltipProps {
     background?: string;
     color?: string;
 }
@@ -14,13 +15,13 @@ interface TooltipOptions extends TooltipProps {
  * The first child of `Tooltip` must be a raw DOM Element. A custom component
  * as the first child will cause bugs.
  */
-export const Tooltip = ({
+export const Tooltip: React.FC<Props> = ({
     children,
     color,
     background,
     style,
     ...rest
-}: TooltipOptions) => {
+}: Props) => {
     const theme = useTheme();
 
     const StyledTooltip = withStyles({

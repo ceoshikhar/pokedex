@@ -1,3 +1,4 @@
+import React from 'react';
 import { Title } from '@/components/title';
 import { Subtitle } from '@/components/subtitle';
 import styled from 'styled-components';
