@@ -33,6 +33,16 @@ export const PokemonsTypeNavigation: React.FC = () => {
         () => fetchTypesOfPokemons()
     );
 
+    if (data && type) {
+        const validPokemonTypes: string[] = data.results.map(
+            (type) => type.name
+        );
+
+        if (!validPokemonTypes.includes(type)) {
+            history.push(config.routes.POKEDEX_POKEMONS);
+        }
+    }
+
     if (data) {
         return (
             <Container>
@@ -59,6 +69,5 @@ export const PokemonsTypeNavigation: React.FC = () => {
 };
 
 const Container = styled.div`
-    max-width: 75vw;
-    margin: 0 auto 2rem auto;
+    margin-bottom: 2rem;
 `;

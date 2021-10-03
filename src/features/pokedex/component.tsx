@@ -17,7 +17,7 @@ export const Pokedex: React.FC = () => {
     const theme = useTheme();
 
     return (
-        <>
+        <MainContainer>
             <Title style={{ marginBottom: '1rem', position: 'relative' }}>
                 Pokédex
                 <Tooltip
@@ -51,7 +51,7 @@ export const Pokedex: React.FC = () => {
                         exact
                         path="/pokedex"
                         component={() => (
-                            <Container>
+                            <InfoContainer>
                                 <Title style={{ marginBottom: '0.5rem' }}>
                                     Browse things from the Pokémon world
                                 </Title>
@@ -59,7 +59,7 @@ export const Pokedex: React.FC = () => {
                                     Select a category from navigation bar above
                                     to start browsing!
                                 </Subtitle>
-                            </Container>
+                            </InfoContainer>
                         )}
                     />
 
@@ -69,11 +69,16 @@ export const Pokedex: React.FC = () => {
                     />
                 </Switch>
             </Suspense>
-        </>
+        </MainContainer>
     );
 };
 
-const Container = styled.div`
+const MainContainer = styled.div`
+    max-width: 1550px;
+    margin: 0 auto;
+`;
+
+const InfoContainer = styled.div`
     margin-top: 8rem;
     text-align: center;
 `;
