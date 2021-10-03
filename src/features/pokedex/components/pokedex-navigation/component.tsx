@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, ButtonGroup } from '@mui/material';
 import { useHistory, useLocation } from 'react-router-dom';
+
 import { config } from '@/utils/config';
 
 export const PokedexNavigation: React.FC = () => {
@@ -63,5 +64,5 @@ export const PokedexNavigation: React.FC = () => {
 const NavigationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 `;

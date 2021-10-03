@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 import { LoadingScreen } from '@/features/loading-screen';
 import { Title } from '@/components/title';
-import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
+import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
 import { PaginationControl } from '@/components/pagination-control';
 import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
@@ -12,6 +12,7 @@ import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
 import { PaginationList } from '@/components/pagination-list';
 
 import { PokemonsList } from './components/pokemons-list';
+import { PokemonsTypeNavigation } from './components/pokemons-type-navigation';
 
 export const Pokemons: React.FC = () => {
     const history = useHistory();
@@ -23,7 +24,7 @@ export const Pokemons: React.FC = () => {
         ).then((res) => res.json());
 
     const { data, isError, isFetching } = useQuery<
-        PokeApiList<PokemonsListItem>
+        PokeApiList<PokemonsResultItem>
     >(['pokedex-browse', offset], () => fetchAllPokemons(offset), {
         keepPreviousData: true,
         refetchOnWindowFocus: false,
@@ -49,6 +50,7 @@ export const Pokemons: React.FC = () => {
 
         return (
             <>
+                <PokemonsTypeNavigation />
                 {isFetching ? (
                     <PaginationList items={items} />
                 ) : (

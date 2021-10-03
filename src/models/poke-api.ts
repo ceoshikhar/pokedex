@@ -5,7 +5,12 @@ export interface PokeApiList<T = unknown> {
     results: T[];
 }
 
-export interface PokemonsListItem {
+export interface PokemonsResultItem {
+    name: string;
+    url: string;
+}
+
+export interface PokemonsTypeResultItem {
     name: string;
     url: string;
 }

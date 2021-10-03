@@ -69,7 +69,7 @@ export const Pokedex: React.FC = () => {
                     />
 
                     <Route
-                        path={config.routes.POKEDEX_POKEMONS_TYPE}
+                        path={config.routes.POKEDEX_POKEMONS_TYPE_WITH_MATCH}
                         component={Pokemons}
                     />
                 </Switch>
