@@ -2,10 +2,12 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import { Chip, Stack } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 import { Card } from '@/components/card';
 import { Pokemon } from '@/models/pokemon';
 import { formatPokemonId, upperCaseFirstLetter } from '@/utils/index';
+import { config } from '@/utils/config';
 
 import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
 
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export const PokemonsCard: React.FC<Props> = ({ apiUrl, name }: Props) => {
+    const history = useHistory();
     const fetchPokemon = (url: string) => fetch(url).then((res) => res.json());
 
     const { data } = useQuery<Pokemon>(`pokemon-${name}`, () =>
@@ -52,6 +55,12 @@ export const PokemonsCard: React.FC<Props> = ({ apiUrl, name }: Props) => {
                                 key={idx}
                                 label={type.type.name}
                                 size="small"
+                                clickable
+                                onClick={() =>
+                                    history.push(
+                                        `${config.routes.POKEDEX_POKEMONS_TYPE}/${type.type.name}`
+                                    )
+                                }
                             />
                         );
                     })}
