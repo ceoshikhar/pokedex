@@ -2,25 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, ButtonGroup } from '@mui/material';
 import { useHistory, useLocation } from 'react-router-dom';
+import { config } from '@/utils/config';
 
 export const PokedexNavigation: React.FC = () => {
     const location = useLocation();
     const history = useHistory();
 
-    const onPokemonsNav = location.pathname === '/pokedex/pokemons';
-    const onItemsNav = location.pathname === '/pokedex/items';
-    const onMachinesNav = location.pathname === '/pokedex/machines';
+    const onPokemonsNav = location.pathname === config.routes.POKEDEX_POKEMONS;
+    const onItemsNav = location.pathname === config.routes.POKEDEX_ITEMS;
+    const onMachinesNav = location.pathname === config.routes.POKEDEX_MACHINES;
 
     const goToPokemonsNav = () => {
-        !onPokemonsNav && history.push('/pokedex/pokemons');
+        !onPokemonsNav && history.push(config.routes.POKEDEX_POKEMONS);
     };
 
     const goToItemsNav = () => {
-        !onItemsNav && history.push('/pokedex/items');
+        !onItemsNav && history.push(config.routes.POKEDEX_ITEMS);
     };
 
     const goToMachinesNav = () => {
-        !onMachinesNav && history.push('/pokedex/machines');
+        !onMachinesNav && history.push(config.routes.POKEDEX_MACHINES);
     };
 
     return (

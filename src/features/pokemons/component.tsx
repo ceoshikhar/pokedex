@@ -9,6 +9,7 @@ import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
 
 import { PokemonsListPagination } from './components/pokemons-list-pagination';
 import { PokemonsList } from './components/pokemons-list';
+import { config } from '@/utils/config';
 
 // No of Pokemons to show on a page
 const limit = 12;
@@ -42,7 +43,7 @@ export const Pokemons: React.FC = () => {
 
         // Don't want to show a blank screen
         if (currPageNum > totalPages) {
-            history.push('/pokedex/pokemons');
+            history.push(config.routes.POKEDEX_POKEMONS);
         }
 
         return (
@@ -53,7 +54,6 @@ export const Pokemons: React.FC = () => {
                     count={Math.ceil(data.count / limit)}
                     disabled={isFetching}
                 />
-                {isFetching && <span> Loading...</span>}
             </>
         );
     }

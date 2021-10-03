@@ -7,6 +7,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { Sidebar } from '@/features/sidebar';
 import { LoadingScreen } from '@/features/loading-screen';
 
+import { config } from '@/utils/config';
+
 const Pokedex = lazy(() => import('@/features/pokedex'));
 const Favorites = lazy(() => import('@/features/favorites'));
 const NotFound = lazy(() => import('@/features/not-found'));
@@ -28,10 +30,15 @@ export const App: React.FC = () => {
                                 <Route
                                     exact
                                     path="/"
-                                    component={() => <Redirect to="pokedex" />}
+                                    component={() => (
+                                        <Redirect to={config.routes.POKEDEX} />
+                                    )}
                                 />
 
-                                <Route path="/pokedex" component={Pokedex} />
+                                <Route
+                                    path={config.routes.POKEDEX}
+                                    component={Pokedex}
+                                />
 
                                 <Route
                                     path="/favorites"

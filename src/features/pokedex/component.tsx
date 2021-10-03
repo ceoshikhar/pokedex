@@ -9,6 +9,7 @@ import { LoadingScreen } from '@/features/loading-screen';
 
 import { PokedexNavigation } from './components/pokedex-navigation';
 import { Subtitle } from '@/components/subtitle';
+import { config } from '@/utils/config';
 
 const Pokemons = lazy(() => import('@/features/pokemons'));
 
@@ -62,7 +63,10 @@ export const Pokedex: React.FC = () => {
                         )}
                     />
 
-                    <Route path="/pokedex/pokemons" component={Pokemons} />
+                    <Route
+                        path={config.routes.POKEDEX_POKEMONS}
+                        component={Pokemons}
+                    />
                 </Switch>
             </Suspense>
         </>
@@ -70,6 +74,6 @@ export const Pokedex: React.FC = () => {
 };
 
 const BrowsingContainer = styled.div`
-    margin: 25% 0;
+    margin-top: 8rem;
     text-align: center;
 `;

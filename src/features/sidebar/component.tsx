@@ -4,17 +4,19 @@ import { SidebarIcon } from './components/sidebar-icon';
 import { Tooltip } from '@/components/tooltip';
 import { IconFavorite, IconPokemon } from '@/components/icons';
 import { useHistory, useLocation } from 'react-router-dom';
+import { config } from '@/utils/config';
 
 export const Sidebar: React.FC = () => {
     const history = useHistory();
     const location = useLocation();
 
-    const onPokedexRoute = location.pathname.startsWith('/pokedex');
-    const onFavoritesRoute = location.pathname === '/favorites';
+    const onPokedexRoute = location.pathname.startsWith(config.routes.POKEDEX);
+    const onFavoritesRoute = location.pathname === config.routes.FAVORITES;
 
-    const goToPokedexRoute = () => !onPokedexRoute && history.push('/');
+    const goToPokedexRoute = () =>
+        !onPokedexRoute && history.push(config.routes.POKEDEX);
     const goToFavoritesRoute = () =>
-        !onFavoritesRoute && history.push('/favorites');
+        !onFavoritesRoute && history.push(config.routes.FAVORITES);
 
     return (
         <Container>

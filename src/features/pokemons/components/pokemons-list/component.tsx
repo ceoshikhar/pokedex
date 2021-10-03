@@ -15,7 +15,15 @@ export const PokemonsList: React.FC<Props> = ({ pokemonsList }: Props) => {
         <ListContainer>
             <Grid container spacing={3}>
                 {pokemonsList.map((pokemon) => (
-                    <Grid item key={pokemon.name} xs={12} sm={6} md={4} lg={3}>
+                    <Grid
+                        item
+                        key={pokemon.name}
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        lg={3}
+                        xl={2}
+                    >
                         <PokemonsCardSmall
                             name={pokemon.name}
                             apiUrl={pokemon.url}
@@ -28,6 +36,6 @@ export const PokemonsList: React.FC<Props> = ({ pokemonsList }: Props) => {
 };
 
 const ListContainer = styled.div`
-    max-width: 1100px;
+    max-width: 1500px;
     margin: 0 auto 2rem auto;
 `;

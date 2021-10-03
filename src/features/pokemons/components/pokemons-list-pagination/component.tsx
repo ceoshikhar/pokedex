@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Pagination } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { config } from '@/utils/config';
 
 interface Props {
     count: number;
@@ -21,7 +22,7 @@ export const PokemonsListPagination: React.FC<Props> = ({
         // example the `...` will trigger this function with page = null
         if (page) {
             if (page === 1) {
-                history.push('/pokedex/pokemons');
+                history.push(config.routes.POKEDEX_POKEMONS);
             } else {
                 // We don't want to show `?page=0`
                 history.push({ search: `?page=${page}` });
