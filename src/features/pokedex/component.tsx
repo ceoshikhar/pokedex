@@ -17,7 +17,7 @@ export const Pokedex: React.FC = () => {
 
     return (
         <>
-            <Title style={{ marginBottom: '2rem', position: 'relative' }}>
+            <Title style={{ marginBottom: '1rem', position: 'relative' }}>
                 Pokédex
                 <Tooltip
                     title={`The Pokédex (ポケモン図鑑; Pokemon Zukan; lit. "Illustrated
@@ -52,7 +52,7 @@ export const Pokedex: React.FC = () => {
                         component={() => (
                             <BrowsingContainer>
                                 <Title style={{ marginBottom: '0.5rem' }}>
-                                    Browse things from Pokémon
+                                    Browse things from the Pokémon world
                                 </Title>
                                 <Subtitle>
                                     Select a category from navigation bar above

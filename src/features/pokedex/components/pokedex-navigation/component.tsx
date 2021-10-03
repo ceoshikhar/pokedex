@@ -62,4 +62,5 @@ export const PokedexNavigation: React.FC = () => {
 const NavigationContainer = styled.div`
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
 `;
