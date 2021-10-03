@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Pagination } from '@mui/material';
+import { Pagination as MUIPagination } from '@mui/material';
 
-import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
     page: number;
 }
 
-export const PokemonsListPagination: React.FC<Props> = ({
+export const Pagination: React.FC<Props> = ({
     count,
     disabled,
     page,
@@ -19,8 +18,8 @@ export const PokemonsListPagination: React.FC<Props> = ({
     const { changePage } = useListPagination();
 
     return (
-        <PaginationContainer>
-            <Pagination
+        <Container>
+            <MUIPagination
                 count={count}
                 page={page}
                 onChange={changePage}
@@ -28,11 +27,11 @@ export const PokemonsListPagination: React.FC<Props> = ({
                 color="primary"
                 disabled={disabled}
             />
-        </PaginationContainer>
+        </Container>
     );
 };
 
-const PaginationContainer = styled.div`
+const Container = styled.div`
     display: flex;
     justify-content: center;
 `;

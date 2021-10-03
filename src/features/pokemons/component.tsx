@@ -6,7 +6,7 @@ import { LoadingScreen } from '@/features/loading-screen';
 import { Title } from '@/components/title';
 import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
 
-import { PokemonsListPagination } from './components/pokemons-list-pagination';
+import { Pagination } from '@/components/pagination';
 import { PokemonsList } from './components/pokemons-list';
 import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
@@ -41,7 +41,7 @@ export const Pokemons: React.FC = () => {
         return (
             <>
                 <PokemonsList pokemonsList={data.results} />
-                <PokemonsListPagination
+                <Pagination
                     page={currPage}
                     count={Math.ceil(data.count / limit)}
                     disabled={isFetching}
