@@ -9,9 +9,15 @@ export const PokedexNavigation: React.FC = () => {
     const location = useLocation();
     const history = useHistory();
 
-    const onPokemonsNav = location.pathname === config.routes.POKEDEX_POKEMONS;
-    const onItemsNav = location.pathname === config.routes.POKEDEX_ITEMS;
-    const onMachinesNav = location.pathname === config.routes.POKEDEX_MACHINES;
+    const onPokemonsNav = location.pathname.startsWith(
+        config.routes.POKEDEX_POKEMONS
+    );
+    const onItemsNav = location.pathname.startsWith(
+        config.routes.POKEDEX_ITEMS
+    );
+    const onMachinesNav = location.pathname.startsWith(
+        config.routes.POKEDEX_MACHINES
+    );
 
     const goToPokemonsNav = () => {
         !onPokemonsNav && history.push(config.routes.POKEDEX_POKEMONS);

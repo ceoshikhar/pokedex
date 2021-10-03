@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import { PokeApiList, PokemonsTypeResultItem } from '@/models/poke-api';
+import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
 import { usePokemonType } from '@/hooks/use-pokemon-type';
 import { config } from '@/utils/config';
 
@@ -18,13 +18,17 @@ export const PokemonsTypeNavigation: React.FC = () => {
             return history.push(config.routes.POKEDEX_POKEMONS);
         }
 
-        history.push(`${config.routes.POKEDEX_POKEMONS_TYPE}/${newValue}`);
+        const goTo = `${config.routes.POKEDEX_POKEMONS_TYPE}/${newValue}`;
+
+        if (history.location.pathname !== goTo) {
+            history.push(goTo);
+        }
     };
 
     const fetchTypesOfPokemons = () =>
         fetch(`https://pokeapi.co/api/v2/type`).then((res) => res.json());
 
-    const { data } = useQuery<PokeApiList<PokemonsTypeResultItem>>(
+    const { data } = useQuery<PokeApiList<PokemonsResultItem>>(
         'types-of-pokemons',
         () => fetchTypesOfPokemons()
     );

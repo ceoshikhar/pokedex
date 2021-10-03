@@ -10,7 +10,10 @@ export interface PokemonsResultItem {
     url: string;
 }
 
-export interface PokemonsTypeResultItem {
-    name: string;
-    url: string;
+export interface PokemonsByTypeList {
+    pokemon: PokemonsTypeResultItem[];
+}
+
+interface PokemonsTypeResultItem {
+    pokemon: PokemonsResultItem;
 }
