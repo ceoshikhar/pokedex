@@ -10,7 +10,7 @@ interface Props {
     page: number;
 }
 
-export const Pagination: React.FC<Props> = ({
+export const PaginationControl: React.FC<Props> = ({
     count,
     disabled,
     page,

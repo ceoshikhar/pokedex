@@ -48,10 +48,10 @@ export const Pokedex: React.FC = () => {
             <Suspense fallback={<LoadingScreen />}>
                 <Switch>
                     <Route
-                        path="/pokedex"
                         exact
+                        path="/pokedex"
                         component={() => (
-                            <BrowsingContainer>
+                            <Container>
                                 <Title style={{ marginBottom: '0.5rem' }}>
                                     Browse things from the Pokémon world
                                 </Title>
@@ -59,12 +59,17 @@ export const Pokedex: React.FC = () => {
                                     Select a category from navigation bar above
                                     to start browsing!
                                 </Subtitle>
-                            </BrowsingContainer>
+                            </Container>
                         )}
                     />
 
                     <Route
                         path={config.routes.POKEDEX_POKEMONS}
+                        component={Pokemons}
+                    />
+
+                    <Route
+                        path={config.routes.POKEDEX_POKEMONS_TYPE}
                         component={Pokemons}
                     />
                 </Switch>
@@ -73,7 +78,7 @@ export const Pokedex: React.FC = () => {
     );
 };
 
-const BrowsingContainer = styled.div`
+const Container = styled.div`
     margin-top: 8rem;
     text-align: center;
 `;

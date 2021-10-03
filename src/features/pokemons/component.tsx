@@ -5,30 +5,39 @@ import { useQuery } from 'react-query';
 import { LoadingScreen } from '@/features/loading-screen';
 import { Title } from '@/components/title';
 import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
-
-import { Pagination } from '@/components/pagination';
-import { PokemonsList } from './components/pokemons-list';
+import { PaginationControl } from '@/components/pagination-control';
 import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
+import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
+import { PaginationList } from '@/components/pagination-list';
+
+import { PokemonsList } from './components/pokemons-list';
 
 export const Pokemons: React.FC = () => {
     const history = useHistory();
     const { offset, limit, currPage } = useListPagination();
 
-    const fetchPokemons = (offset = 0) =>
+    const fetchAllPokemons = (offset = 0) =>
         fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         ).then((res) => res.json());
 
     const { data, isError, isFetching } = useQuery<
         PokeApiList<PokemonsListItem>
-    >(['pokedex-browse', offset], () => fetchPokemons(offset), {
+    >(['pokedex-browse', offset], () => fetchAllPokemons(offset), {
         keepPreviousData: true,
+        refetchOnWindowFocus: false,
     });
 
     if (isError) {
-        <Title>Something went wrong while fetching the Pokemson</Title>;
+        return <Title>Something went wrong while fetching the Pokemson</Title>;
     }
+
+    // "Display a placeholder preview of your content before the data gets
+    //  loaded to reduce load-time frustration." - @MUI Developers
+    const items = Array(limit)
+        .fill(0)
+        .map(() => <PokemonCardPlaceholder />);
 
     if (data) {
         const totalPages = Math.ceil(data.count / limit);
@@ -40,8 +49,12 @@ export const Pokemons: React.FC = () => {
 
         return (
             <>
-                <PokemonsList pokemonsList={data.results} />
-                <Pagination
+                {isFetching ? (
+                    <PaginationList items={items} />
+                ) : (
+                    <PokemonsList pokemonsList={data.results} />
+                )}
+                <PaginationControl
                     page={currPage}
                     count={Math.ceil(data.count / limit)}
                     disabled={isFetching}

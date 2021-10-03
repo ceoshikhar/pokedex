@@ -7,14 +7,14 @@ import { Card } from '@/components/card';
 import { Pokemon } from '@/models/pokemon';
 import { formatPokemonId, upperCaseFirstLetter } from '@/utils/index';
 
-import { PokemonCardPlaceholder } from '../pokemons-card-placeholder';
+import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
 
 interface Props {
     apiUrl: string;
     name: string;
 }
 
-export const PokemonsCardSmall: React.FC<Props> = ({ apiUrl, name }: Props) => {
+export const PokemonsCard: React.FC<Props> = ({ apiUrl, name }: Props) => {
     const fetchPokemon = (url: string) => fetch(url).then((res) => res.json());
 
     const { data } = useQuery<Pokemon>(`pokemon-${name}`, () =>
