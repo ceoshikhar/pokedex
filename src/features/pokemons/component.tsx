@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-import { useSearchParams } from '@/hooks/use-search-params';
 import { LoadingScreen } from '@/features/loading-screen';
 import { Title } from '@/components/title';
 import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
@@ -10,18 +9,11 @@ import { PokeApiList, PokemonsListItem } from '@/models/poke-api';
 import { PokemonsListPagination } from './components/pokemons-list-pagination';
 import { PokemonsList } from './components/pokemons-list';
 import { config } from '@/utils/config';
-
-// No of Pokemons to show on a page
-const limit = 12;
+import { useListPagination } from '@/hooks/use-list-pagination';
 
 export const Pokemons: React.FC = () => {
     const history = useHistory();
-    const pageSearchParam = useSearchParams('page');
-
-    const currPageNum = pageSearchParam ? parseInt(pageSearchParam) : 1;
-    // offset should start from page 2.
-    // That' means on page 1, the offset should be 0.
-    const offset = currPageNum * limit - limit;
+    const { offset, limit, currPage } = useListPagination();
 
     const fetchPokemons = (offset = 0) =>
         fetch(
@@ -42,7 +34,7 @@ export const Pokemons: React.FC = () => {
         const totalPages = Math.ceil(data.count / limit);
 
         // Don't want to show a blank screen
-        if (currPageNum > totalPages) {
+        if (currPage > totalPages) {
             history.push(config.routes.POKEDEX_POKEMONS);
         }
 
@@ -50,7 +42,7 @@ export const Pokemons: React.FC = () => {
             <>
                 <PokemonsList pokemonsList={data.results} />
                 <PokemonsListPagination
-                    page={currPageNum}
+                    page={currPage}
                     count={Math.ceil(data.count / limit)}
                     disabled={isFetching}
                 />
