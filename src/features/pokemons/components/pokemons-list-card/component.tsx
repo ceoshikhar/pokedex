@@ -31,7 +31,7 @@ export const PokemonsListCard: React.FC<Props> = ({
             res.json()
         );
 
-    const { data } = useQuery<Pokemon>(`pokemon-${name}`, () =>
+    const { data, isError } = useQuery<Pokemon>(`pokemon-${name}`, () =>
         fetchPokemon(name)
     );
 
@@ -42,6 +42,11 @@ export const PokemonsListCard: React.FC<Props> = ({
             props.onClick(e);
         }
     };
+
+    // Some Pokemon evolution's chain have Pokemon names that return 404 error.
+    if (isError) {
+        return null;
+    }
 
     if (data) {
         const image =
