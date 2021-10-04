@@ -6,35 +6,31 @@ import { usePokemonType } from '@/hooks/use-pokemon-type';
 import { PokemonsByTypeList, PokemonsResultItem } from '@/models/poke-api';
 import { useListPagination } from '@/hooks/use-list-pagination';
 import { config } from '@/utils/config';
-import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
+import { LoadingScreen } from '@/features/loading-screen';
 
 import { PokemonsList } from '../pokemons-list';
-import { LoadingScreen } from '@/features/loading-screen';
+import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 
 export const PokemonsListByType: React.FC = () => {
     const history = useHistory();
-    const type = usePokemonType();
+    const pokemonType = usePokemonType();
     const { limit, currPage, offset } = useListPagination();
 
-    const fetchPokemonsByType = (offset = 0) =>
+    const fetchPokemonsByType = (type = '') =>
         fetch(`https://pokeapi.co/api/v2/type/${type}`).then((res) =>
             res.json()
         );
 
     const { data, isFetching } = useQuery<PokemonsByTypeList>(
-        `pokemons-type-${type}`,
-        () => fetchPokemonsByType(),
-        {
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
-        }
+        `pokemons-type-${pokemonType}`,
+        () => fetchPokemonsByType(pokemonType)
     );
 
     const items = Array(limit)
         .fill(0)
-        .map(() => <PokemonCardPlaceholder />);
+        .map(() => <PokemonsListCardPlaceholder />);
 
     if (data) {
         const count = data.pokemon.length;
@@ -54,7 +50,9 @@ export const PokemonsListByType: React.FC = () => {
         const totalPages = Math.ceil(count / limit);
 
         if (currPage > totalPages) {
-            history.push(`${config.routes.POKEDEX_POKEMONS_TYPE}/${type}`);
+            history.push(
+                `${config.routes.POKEDEX_POKEMONS_TYPE}/${pokemonType}`
+            );
         }
 
         return (

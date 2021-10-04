@@ -72,7 +72,7 @@ export const Pokedex: React.FC = () => {
 
                     <Route
                         exact
-                        path={config.routes.POKEDEX_POKEMONS_TYPE_WITH_MATCH}
+                        path={config.routes.POKEDEX_POKEMONS_WITH_TYPE_MATCH}
                         component={Pokemons}
                     />
 

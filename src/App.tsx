@@ -10,10 +10,23 @@ import { LoadingScreen } from '@/features/loading-screen';
 import { config } from '@/utils/config';
 
 const Pokedex = lazy(() => import('@/features/pokedex'));
+const Pokemon = lazy(() => import('@/features/pokemon'));
 const Favorites = lazy(() => import('@/features/favorites'));
 const NotFound = lazy(() => import('@/features/not-found'));
 
-const queryClient = new QueryClient();
+const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            keepPreviousData: true,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+            retry: false,
+            staleTime: twentyFourHoursInMs,
+        },
+    },
+});
 
 export const App: React.FC = () => {
     return (
@@ -41,7 +54,20 @@ export const App: React.FC = () => {
                                 />
 
                                 <Route
-                                    path="/favorites"
+                                    exact
+                                    path={config.routes.POKEMON}
+                                    component={() => (
+                                        <h1>TODO: Pokemon with Search</h1>
+                                    )}
+                                />
+
+                                <Route
+                                    path={config.routes.POKEMON_WITH_NAME_MATCH}
+                                    component={Pokemon}
+                                />
+
+                                <Route
+                                    path={config.routes.FAVORITES}
                                     component={Favorites}
                                 />
 

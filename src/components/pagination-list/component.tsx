@@ -12,7 +12,7 @@ export const PaginationList: React.FC<Props> = ({ items }: Props) => {
             container
             direction={{ xs: 'column', sm: 'row' }}
             alignItems={{ xs: 'center' }}
-            sx={{ mb: '2rem', width: '100%' }}
+            sx={{ mb: '2rem' }}
         >
             {items.map((item, idx) => (
                 <Grid item key={idx} xs={12} sm={6} md={4} lg={3} xl={2}>

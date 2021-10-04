@@ -1,7 +1,7 @@
 import React from 'react';
-import { Tab, Tabs } from '@material-ui/core';
+import { Tab, Tabs } from '@mui/material';
 import { useQuery } from 'react-query';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
@@ -10,10 +10,11 @@ import { config } from '@/utils/config';
 
 // `all` tab is same as `/pokedex/pokemons`
 export const PokemonsTypeNavigation: React.FC = () => {
+    const theme = useTheme();
     const history = useHistory();
     const type = usePokemonType();
 
-    const handleChange = (event: any, newValue: string) => {
+    const handleChange = (_: any, newValue: string) => {
         if (newValue === 'all') {
             return history.push(config.routes.POKEDEX_POKEMONS);
         }
@@ -50,6 +51,10 @@ export const PokemonsTypeNavigation: React.FC = () => {
                     value={type || 'all'}
                     onChange={handleChange}
                     variant="scrollable"
+                    TabIndicatorProps={{
+                        style: { background: theme.color.brightBlue },
+                    }}
+                    textColor="inherit"
                     aria-label="pokemons by type navigation tabs"
                 >
                     <Tab value="all" label="all" />

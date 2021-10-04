@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SidebarIcon } from './components/sidebar-icon';
 import { Tooltip } from '@/components/tooltip';
-import { IconFavorite, IconPokemon } from '@/components/icons';
+import { IconFavorite, IconPokemon, IconPokemonText } from '@/components/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { config } from '@/utils/config';
 
@@ -11,10 +11,13 @@ export const Sidebar: React.FC = () => {
     const location = useLocation();
 
     const onPokedexRoute = location.pathname.startsWith(config.routes.POKEDEX);
+    const onPokemonRoute = location.pathname.startsWith(config.routes.POKEMON);
     const onFavoritesRoute = location.pathname === config.routes.FAVORITES;
 
     const goToPokedexRoute = () =>
         !onPokedexRoute && history.push(config.routes.POKEDEX);
+    const goToPokemonRoute = () =>
+        !onPokemonRoute && history.push(config.routes.POKEMON);
     const goToFavoritesRoute = () =>
         !onFavoritesRoute && history.push(config.routes.FAVORITES);
 
@@ -31,6 +34,21 @@ export const Sidebar: React.FC = () => {
                         icon={IconPokemon}
                         active={onPokedexRoute}
                         onClick={goToPokedexRoute}
+                    />
+                </i>
+            </Tooltip>
+
+            <Tooltip
+                title="Pokemon"
+                placement="right"
+                enterDelay={500}
+                disableHoverListener={onPokedexRoute}
+            >
+                <i>
+                    <SidebarIcon
+                        icon={IconPokemonText}
+                        active={onPokemonRoute}
+                        onClick={goToPokemonRoute}
                     />
                 </i>
             </Tooltip>

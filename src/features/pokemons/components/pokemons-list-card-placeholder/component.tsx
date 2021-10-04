@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton, Stack } from '@mui/material';
 
-export const PokemonCardPlaceholder: React.FC = () => {
+export const PokemonsListCardPlaceholder: React.FC = () => {
     return (
         <>
             <Skeleton variant="rectangular" width={210} height={215} />

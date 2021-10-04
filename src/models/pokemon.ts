@@ -2,16 +2,40 @@
 export interface Pokemon {
     id: number;
     name: string;
+    height: number;
+    weight: number;
     types: PokemonType[];
     sprites: PokemonSprites;
+    abilities: Ability[];
+    species: { name: string; url: string };
+    stats: Stats[];
 }
 
-interface PokemonType {
+export interface PokemonType {
     slot: number;
     type: {
         name: string;
         url: string;
     };
+}
+
+export interface PokemonSpecies {
+    color: { name: string };
+    egg_groups: { name: string; url: string }[];
+    evolution_chain: { url: string };
+}
+
+export interface PokemonEvolution {
+    id: number;
+    chain: Chain;
+}
+
+export interface Chain {
+    species: {
+        name: string;
+        url: string;
+    };
+    evolves_to: Chain[] | [];
 }
 
 interface PokemonSprites {
@@ -21,4 +45,17 @@ interface PokemonSprites {
             front_default: string;
         };
     };
+}
+
+interface Ability {
+    is_hidden: boolean;
+    ability: {
+        name: string;
+        url: string;
+    };
+}
+
+interface Stats {
+    base_stat: number;
+    stat: { name: string };
 }

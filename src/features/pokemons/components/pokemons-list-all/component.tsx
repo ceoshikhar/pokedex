@@ -7,11 +7,11 @@ import { Title } from '@/components/title';
 import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
 import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
-import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
 
 import { PokemonsList } from '../pokemons-list';
+import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 
 export const PokemonsListAll: React.FC = () => {
     const history = useHistory();
@@ -24,10 +24,7 @@ export const PokemonsListAll: React.FC = () => {
 
     const { data, isError, isFetching } = useQuery<
         PokeApiList<PokemonsResultItem>
-    >(['pokemons-all', offset], () => fetchAllPokemons(offset), {
-        keepPreviousData: true,
-        refetchOnWindowFocus: false,
-    });
+    >(['pokemons-all', offset], () => fetchAllPokemons(offset));
 
     if (isError) {
         return <Title>Something went wrong while fetching the Pokemson</Title>;
@@ -37,7 +34,7 @@ export const PokemonsListAll: React.FC = () => {
     //  loaded to reduce load-time frustration." - @MUI Developers
     const items = Array(limit)
         .fill(0)
-        .map(() => <PokemonCardPlaceholder />);
+        .map(() => <PokemonsListCardPlaceholder />);
 
     if (data) {
         const totalPages = Math.ceil(data.count / limit);

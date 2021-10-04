@@ -1,3 +1,5 @@
+import { Chain } from '@/models/pokemon';
+
 export * from './config';
 
 export function upperCaseFirstLetter(str: string): string {
@@ -12,4 +14,18 @@ export function formatPokemonId(num: number): string {
     }
 
     return num.toString();
+}
+
+// Pokemon's evolution chain is nested.
+// Starting Pokemon species -> evolves to -> Pokemon species -> until we reach
+// the highest Pokemon species in the chain.
+export function pokemonNamesFromChainInOrder(chain: Chain): string[] {
+    if (chain.evolves_to.length === 0) {
+        return [chain.species.name];
+    }
+
+    return [
+        chain.species.name,
+        ...pokemonNamesFromChainInOrder(chain.evolves_to[0]),
+    ];
 }

@@ -1,99 +1,78 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import { Chip, Stack } from '@mui/material';
-import { useHistory } from 'react-router-dom';
 
-import { Card } from '@/components/card';
-import { Pokemon } from '@/models/pokemon';
+import { Title } from '@/components/title';
 import { formatPokemonId, upperCaseFirstLetter } from '@/utils/index';
-import { config } from '@/utils/config';
+import { Pokemon } from '@/models/pokemon';
+import { Card } from '@/components/card';
 
-import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
+import { PokemonTypesChip } from '../pokemon-types-chip';
+import { PokemonInfoTabs } from '../pokemon-info-tabs';
 
 interface Props {
-    apiUrl: string;
-    name: string;
+    pokemon: Pokemon;
 }
 
-export const PokemonsCard: React.FC<Props> = ({ apiUrl, name }: Props) => {
-    const history = useHistory();
-    const fetchPokemon = (url: string) => fetch(url).then((res) => res.json());
+export const PokemonCard: React.FC<Props> = ({ pokemon }: Props) => {
+    const image =
+        pokemon.sprites.other['official-artwork'].front_default ||
+        pokemon.sprites.front_default;
 
-    const { data } = useQuery<Pokemon>(`pokemon-${name}`, () =>
-        fetchPokemon(apiUrl)
-    );
-
-    if (data) {
-        const pokemon = {
-            id: data.id,
-            name: data.name,
-            types: data.types,
-            image:
-                data.sprites.other['official-artwork'].front_default ||
-                data.sprites.front_default,
-        };
-
-        return (
+    return (
+        <Container>
             <Card
                 style={{
-                    padding: '1rem',
-                    width: 'fit-content',
+                    display: 'flex',
+                    padding: '2rem',
                     position: 'relative',
+                    borderRadius: '16px',
+                    flexDirection: 'column',
+                    minHeight: '85vh',
                 }}
             >
-                <StyledId>#{formatPokemonId(pokemon.id)}</StyledId>
+                <div>
+                    <Title style={{ marginBottom: '0.5rem', maxWidth: '90%' }}>
+                        {upperCaseFirstLetter(pokemon.name)}
+                    </Title>
+                    <PokemonTypesChip types={pokemon.types} />
+                    <Id>#{formatPokemonId(pokemon.id)}</Id>
+                    <div
+                        style={{
+                            width: 'fit-content',
+                            margin: '0 auto',
+                        }}
+                    >
+                        <img
+                            src={image}
+                            width={450}
+                            height={450}
+                            alt={`${pokemon.name} official artwork`}
+                            style={{
+                                padding: '1rem',
+                                boxSizing: 'border-box',
+                            }}
+                        />
+                    </div>
+                </div>
 
-                <StyledImage src={pokemon.image} width={180} height={180} />
-
-                <StyledName>{upperCaseFirstLetter(name)}</StyledName>
-
-                <Stack direction="row" spacing={1}>
-                    {pokemon.types.map((type, idx) => {
-                        return (
-                            <Chip
-                                key={idx}
-                                label={type.type.name}
-                                size="small"
-                                clickable
-                                onClick={() =>
-                                    history.push(
-                                        `${config.routes.POKEDEX_POKEMONS_TYPE}/${type.type.name}`
-                                    )
-                                }
-                            />
-                        );
-                    })}
-                </Stack>
+                <PokemonInfoTabs pokemon={pokemon} />
             </Card>
-        );
-    }
-
-    return <PokemonCardPlaceholder />;
+        </Container>
+    );
 };
 
-const StyledId = styled.p`
+const Container = styled.div`
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+`;
+
+const Id = styled.p`
     font-size: 0.875rem;
     font-family: 'Inter';
     font-weight: 900;
     position: absolute;
     top: 0.5rem;
-    right: 0.5rem;
-`;
-
-const StyledImage = styled.img`
-    padding: 1rem;
-    box-sizing: border-box;
-`;
-
-const StyledName = styled.h3`
-    font-family: 'Inter';
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    /* image width */
-    max-width: 180px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    right: 0.95rem;
 `;
