@@ -12,12 +12,13 @@ import { Subtitle } from '@/components/subtitle';
 import { config } from '@/utils/config';
 
 const Pokemons = lazy(() => import('@/features/pokemons'));
+const NotFound = lazy(() => import('@/features/not-found'));
 
 export const Pokedex: React.FC = () => {
     const theme = useTheme();
 
     return (
-        <MainContainer>
+        <>
             <Title style={{ marginBottom: '1rem', position: 'relative' }}>
                 Pokédex
                 <Tooltip
@@ -64,19 +65,24 @@ export const Pokedex: React.FC = () => {
                     />
 
                     <Route
+                        exact
                         path={config.routes.POKEDEX_POKEMONS}
                         component={Pokemons}
                     />
+
+                    <Route
+                        exact
+                        path={config.routes.POKEDEX_POKEMONS_TYPE_WITH_MATCH}
+                        component={Pokemons}
+                    />
+
+                    {/* For routes like `pokedex/pokemons/type` */}
+                    <Route component={NotFound} />
                 </Switch>
             </Suspense>
-        </MainContainer>
+        </>
     );
 };
-
-const MainContainer = styled.div`
-    max-width: 1550px;
-    margin: 0 auto;
-`;
 
 const InfoContainer = styled.div`
     margin-top: 8rem;

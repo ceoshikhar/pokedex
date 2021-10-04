@@ -9,7 +9,7 @@ import { Pokemon } from '@/models/pokemon';
 import { formatPokemonId, upperCaseFirstLetter } from '@/utils/index';
 import { config } from '@/utils/config';
 
-import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
+import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
 
 interface Props {
     apiUrl: string;
@@ -44,7 +44,7 @@ export const PokemonsCard: React.FC<Props> = ({ apiUrl, name }: Props) => {
             >
                 <StyledId>#{formatPokemonId(pokemon.id)}</StyledId>
 
-                <StyledImage src={pokemon.image} width={200} height={200} />
+                <StyledImage src={pokemon.image} width={180} height={180} />
 
                 <StyledName>{upperCaseFirstLetter(name)}</StyledName>
 
@@ -92,7 +92,7 @@ const StyledName = styled.h3`
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     /* image width */
-    max-width: 200px;
+    max-width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -37,7 +37,7 @@ body {
 
 /**Scrollbar customization */
 body::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.75rem;
 }
 
 body::-webkit-scrollbar-track {

@@ -6,7 +6,7 @@ import { usePokemonType } from '@/hooks/use-pokemon-type';
 import { PokemonsByTypeList, PokemonsResultItem } from '@/models/poke-api';
 import { useListPagination } from '@/hooks/use-list-pagination';
 import { config } from '@/utils/config';
-import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
+import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
 
@@ -17,8 +17,6 @@ export const PokemonsListByType: React.FC = () => {
     const history = useHistory();
     const type = usePokemonType();
     const { limit, currPage, offset } = useListPagination();
-
-    console.log({ offset });
 
     const fetchPokemonsByType = (offset = 0) =>
         fetch(`https://pokeapi.co/api/v2/type/${type}`).then((res) =>
@@ -40,6 +38,11 @@ export const PokemonsListByType: React.FC = () => {
 
     if (data) {
         const count = data.pokemon.length;
+
+        if (!count) {
+            history.push(config.routes.POKEDEX_POKEMONS);
+        }
+
         // So that we can re-use `<PokemonsList>` component.
         const pokemonsList: PokemonsResultItem[] = data.pokemon.map(
             (pokemon) => ({

@@ -7,7 +7,7 @@ import { Title } from '@/components/title';
 import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
 import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
-import { PokemonCardPlaceholder } from '@/features/pokemon-card-placeholder';
+import { PokemonCardPlaceholder } from '@/features/pokemon/components/pokemon-card-placeholder';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
 

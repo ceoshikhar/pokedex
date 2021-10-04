@@ -56,16 +56,16 @@ export const App: React.FC = () => {
     );
 };
 
+const Layout = styled.div`
+    display: flex;
+`;
+
 const SidebarContainer = styled.div`
     width: 86px;
 `;
 
 const DashboardContainer = styled.div`
-    width: 100%;
+    width: calc(100vw - 86px);
     padding: 1.5rem;
-`;
-
-const Layout = styled.div`
-    display: flex;
-    max-width: 100vw;
+    box-sizing: border-box;
 `;

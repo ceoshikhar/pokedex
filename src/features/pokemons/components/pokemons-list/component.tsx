@@ -3,7 +3,7 @@ import React from 'react';
 import { PokemonsResultItem } from '@/models/poke-api';
 import { PaginationList } from '@/components/pagination-list';
 
-import { PokemonsCard } from '@/features/pokemon-card';
+import { PokemonsCard } from '@/features/pokemon/components/pokemon-card';
 
 interface Props {
     pokemonsList: PokemonsResultItem[];
