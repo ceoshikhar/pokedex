@@ -27,7 +27,6 @@ export const PokemonCard: React.FC<Props> = ({ pokemon }: Props) => {
                     position: 'relative',
                     borderRadius: '16px',
                     flexDirection: 'column',
-                    minHeight: '85vh',
                 }}
             >
                 <div>
@@ -63,7 +62,6 @@ export const PokemonCard: React.FC<Props> = ({ pokemon }: Props) => {
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
     max-width: 900px;
     margin: 0 auto;
 `;

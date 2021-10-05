@@ -7,7 +7,12 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { PokemonSpecies } from '@/models/pokemon';
 
-import { StatsContainer, StatsLabel, StatsValue } from '../../styles';
+import {
+    StatsContainer,
+    StatsLabel,
+    StatsOuterContainer,
+    StatsValue,
+} from '../../styles';
 
 interface Props {
     value: number;
@@ -30,7 +35,7 @@ export const PokemonTabAbout: React.FC<Props> = ({
 
     return (
         <TabPanel value={value} index={index}>
-            <MainContainer>
+            <StatsOuterContainer>
                 <StatsContainer>
                     <StatsLabel>Height</StatsLabel>
                     <StatsValue>{pokemon.height} dm</StatsValue>
@@ -66,17 +71,10 @@ export const PokemonTabAbout: React.FC<Props> = ({
                         </Flex>
                     </StatsContainer>
                 )}
-            </MainContainer>
+            </StatsOuterContainer>
         </TabPanel>
     );
 };
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 1.5rem;
-    column-gap: 1.5rem;
-`;
 
 const Flex = styled.div`
     display: flex;

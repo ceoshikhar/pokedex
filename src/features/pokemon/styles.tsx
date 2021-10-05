@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const StatsOuterContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+`;
+
 export const StatsContainer = styled.div`
     display: flex;
     flex-direction: column;

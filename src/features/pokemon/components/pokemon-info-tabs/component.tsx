@@ -6,7 +6,6 @@ import { PokemonTabsNavigation } from '../pokemon-tabs-navigation';
 import { PokemonTabAbout } from '../pokemon-tab-about/component';
 import { PokemonTabStats } from '../pokemon-tab-stats';
 import { PokemonTabEvolutions } from '../pokemon-tab-evolutions';
-import { PokemonTabMoves } from '../pokemon-tab-moves';
 
 interface Props {
     pokemon: Pokemon;
@@ -34,7 +33,6 @@ export const PokemonInfoTabs: React.FC<Props> = ({ pokemon }: Props) => {
                 pokemon={pokemon}
                 handleClickOnCard={() => setCurrTab(0)}
             />
-            <PokemonTabMoves value={currTab} index={3} />
         </div>
     );
 };

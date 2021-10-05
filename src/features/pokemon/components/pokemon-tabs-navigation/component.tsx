@@ -37,7 +37,6 @@ export const PokemonTabsNavigation: React.FC<Props> = ({
             <Tab label="about" {...a11yProps(0, 'about')} />
             <Tab label="base stats" {...a11yProps(1, 'base stats')} />
             <Tab label="evolution" {...a11yProps(2, 'evolutions')} />
-            <Tab label="moves" {...a11yProps(3, 'moves')} />
         </Tabs>
     );
 };
