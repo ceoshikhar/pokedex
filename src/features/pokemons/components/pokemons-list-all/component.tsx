@@ -8,11 +8,13 @@ import { config } from '@/utils/config';
 import { useListPagination } from '@/hooks/use-list-pagination';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
+import { useDocumentTitle } from '@/hooks/use-document-title';
 
 import { PokemonsList } from '../pokemons-list';
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 
 export const PokemonsListAll: React.FC = () => {
+    useDocumentTitle('All Pokémons');
     const history = useHistory();
     const { offset, limit, currPage } = useListPagination();
 

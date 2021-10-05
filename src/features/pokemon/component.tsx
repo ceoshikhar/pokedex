@@ -6,10 +6,11 @@ import { Title } from '@/components/title';
 import { config } from '@/utils/config';
 import { LoadingScreen } from '@/features/loading-screen';
 import { Pokemon as IPokemon } from '@/models/pokemon';
+import { useDocumentTitle } from '@/hooks/use-document-title';
+import { upperCaseFirstLetter } from '@/utils/index';
 
 import { PokemonCard } from './components/pokemon-card';
 import { PokemonSearch } from './components/pokemon-search/component';
-import { useDocumentTitle } from '@/hooks/use-document-title';
 
 export const Pokemon: React.FC = () => {
     const match = useRouteMatch<{ name: string }>(
@@ -17,7 +18,7 @@ export const Pokemon: React.FC = () => {
     );
     const pokemonName = match?.params.name || '';
 
-    useDocumentTitle(pokemonName || 'Pokémon');
+    useDocumentTitle(upperCaseFirstLetter(pokemonName) || 'Pokémon');
 
     // Same query key is used in `PokemonCard` for caching
     const fetchPokemon = (name: string) =>

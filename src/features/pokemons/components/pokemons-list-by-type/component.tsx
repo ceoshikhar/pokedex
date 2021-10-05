@@ -10,6 +10,7 @@ import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
 import { upperCaseFirstLetter } from '@/utils/index';
 import { Title } from '@/components/title';
+import { useDocumentTitle } from '@/hooks/use-document-title';
 
 import { PokemonsList } from '../pokemons-list';
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
@@ -17,6 +18,7 @@ import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 export const PokemonsListByType: React.FC = () => {
     const history = useHistory();
     const pokemonType = usePokemonType();
+    useDocumentTitle(upperCaseFirstLetter(pokemonType + ' Pokémons' || ''));
     const { limit, currPage, offset } = useListPagination();
 
     const fetchPokemonsByType = (type = '') =>
