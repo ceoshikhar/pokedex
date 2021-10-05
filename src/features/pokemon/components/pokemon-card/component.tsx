@@ -8,6 +8,7 @@ import { Card } from '@/components/card';
 
 import { PokemonTypesChip } from '../pokemon-types-chip';
 import { PokemonInfoTabs } from '../pokemon-info-tabs';
+import { FavoritesToggleButton } from '@/features/favorites/components/favorites-toggle-button';
 
 interface Props {
     pokemon: Pokemon;
@@ -30,10 +31,27 @@ export const PokemonCard: React.FC<Props> = ({ pokemon }: Props) => {
                 }}
             >
                 <div>
-                    <Title style={{ marginBottom: '0.5rem', maxWidth: '90%' }}>
-                        {upperCaseFirstLetter(pokemon.name)}
-                    </Title>
-                    <PokemonTypesChip types={pokemon.types} />
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <div>
+                            <Title
+                                style={{
+                                    marginBottom: '0.5rem',
+                                }}
+                            >
+                                {upperCaseFirstLetter(pokemon.name)}
+                            </Title>
+                            <PokemonTypesChip types={pokemon.types} />
+                        </div>
+
+                        <FavoritesToggleButton pokemonName={pokemon.name} />
+                    </div>
+
                     <Id>#{formatPokemonId(pokemon.id)}</Id>
                     <div
                         style={{

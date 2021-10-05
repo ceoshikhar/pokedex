@@ -31,7 +31,7 @@ export const PokemonInfoTabs: React.FC<Props> = ({ pokemon }: Props) => {
                 value={currTab}
                 index={2}
                 pokemon={pokemon}
-                handleClickOnCard={() => setCurrTab(0)}
+                handleOnClick={() => setCurrTab(0)}
             />
         </div>
     );

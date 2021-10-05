@@ -1,25 +1,25 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useTheme } from 'styled-components';
+import { Grid } from '@mui/material';
 
 import { TabPanel } from '@/components/tab-panel';
 import { Pokemon, PokemonEvolution } from '@/models/pokemon';
 import { pokemonNamesFromChainInOrder } from '@/utils/index';
 import { PokemonsListCard } from '@/features/pokemons/components/pokemons-list-card';
-import { Grid } from '@mui/material';
 
 interface Props {
     value: number;
     index: number;
     pokemon: Pokemon;
-    handleClickOnCard: (e: React.SyntheticEvent<any>) => void;
+    handleOnClick: (e: React.SyntheticEvent<any>) => void;
 }
 
 export const PokemonTabEvolutions: React.FC<Props> = ({
     value,
     index,
     pokemon,
-    handleClickOnCard,
+    handleOnClick,
 }: Props) => {
     const theme = useTheme();
 
@@ -47,7 +47,7 @@ export const PokemonTabEvolutions: React.FC<Props> = ({
                     alignItems={{ xs: 'center' }}
                     justifyContent="center"
                 >
-                    {pokemonsInEvolution.map((pokemon, idx) => (
+                    {pokemonsInEvolution.map((pokemonName, idx) => (
                         <Grid item key={idx}>
                             <div
                                 style={{
@@ -56,12 +56,12 @@ export const PokemonTabEvolutions: React.FC<Props> = ({
                                 }}
                             >
                                 <PokemonsListCard
-                                    name={pokemon}
+                                    pokemonName={pokemonName}
                                     evolutionIdx={idx + 1}
                                     style={{
                                         border: `2px solid ${theme.color.primary}`,
                                     }}
-                                    onClick={handleClickOnCard}
+                                    onClick={handleOnClick}
                                 />
                             </div>
                         </Grid>

@@ -8,17 +8,19 @@ import { Pokemon } from '@/models/pokemon';
 import { formatPokemonId, upperCaseFirstLetter } from '@/utils/index';
 import { config } from '@/utils/config';
 import { PokemonTypesChip } from '@/features/pokemon/components/pokemon-types-chip';
+import { FavoritesToggleButton } from '@/features/favorites/components/favorites-toggle-button';
 
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 import { Chip } from '@mui/material';
+import { PokemonEvolutionChip } from '@/features/pokemon/components/pokemon-evolution-chip';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    name: string;
+    pokemonName: string;
     evolutionIdx?: number;
 }
 
 export const PokemonsListCard: React.FC<Props> = ({
-    name,
+    pokemonName,
     style,
     evolutionIdx = 0,
     ...props
@@ -26,17 +28,17 @@ export const PokemonsListCard: React.FC<Props> = ({
     const history = useHistory();
 
     // Same query key is used in `PokemonCard` for caching
-    const fetchPokemon = (name: string) =>
-        fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) =>
+    const fetchPokemon = (pokemonName: string) =>
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) =>
             res.json()
         );
 
-    const { data, isError } = useQuery<Pokemon>(`pokemon-${name}`, () =>
-        fetchPokemon(name)
+    const { data, isError } = useQuery<Pokemon>(`pokemon-${pokemonName}`, () =>
+        fetchPokemon(pokemonName)
     );
 
     const showPokemonCard = (e: any) => {
-        history.push(`${config.routes.POKEMON}/${name}`);
+        history.push(`${config.routes.POKEMON}/${pokemonName}`);
 
         if (props.onClick) {
             props.onClick(e);
@@ -65,16 +67,16 @@ export const PokemonsListCard: React.FC<Props> = ({
                 {...props}
                 onClick={showPokemonCard}
             >
-                {evolutionIdx > 0 && (
-                    <EvolutoionIdxContainer>
-                        <Chip
-                            label={evolutionIdx}
-                            variant="outlined"
-                            color="secondary"
-                            size="small"
+                <TopLeftContainer>
+                    {evolutionIdx > 0 ? (
+                        <PokemonEvolutionChip evolutionIdx={evolutionIdx} />
+                    ) : (
+                        <FavoritesToggleButton
+                            pokemonName={pokemonName}
+                            size="medium"
                         />
-                    </EvolutoionIdxContainer>
-                )}
+                    )}
+                </TopLeftContainer>
 
                 <Id>#{formatPokemonId(data.id)}</Id>
 
@@ -99,7 +101,7 @@ const Id = styled.p`
     right: 0.5rem;
 `;
 
-const EvolutoionIdxContainer = styled.div`
+const TopLeftContainer = styled.div`
     font-size: 0.875rem;
     font-family: 'Inter';
     font-weight: 900;
