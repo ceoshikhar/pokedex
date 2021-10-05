@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
@@ -8,12 +8,12 @@ import { useListPagination } from '@/hooks/use-list-pagination';
 import { config } from '@/utils/config';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
-import { LoadingScreen } from '@/features/loading-screen';
 
 import { PokemonsList } from '../pokemons-list';
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 
 export const PokemonsListByType: React.FC = () => {
+    const [loading, setLoading] = useState(true);
     const history = useHistory();
     const pokemonType = usePokemonType();
     const { limit, currPage, offset } = useListPagination();
@@ -32,12 +32,26 @@ export const PokemonsListByType: React.FC = () => {
         .fill(0)
         .map(() => <PokemonsListCardPlaceholder />);
 
-    if (data) {
-        const count = data.pokemon.length;
+    // For some `Pokemon Type`, PokeAPI returns no Pokemons.
+    useEffect(() => {
+        if (data) {
+            const count = data.pokemon.length;
 
-        if (!count) {
-            history.push(config.routes.POKEDEX_POKEMONS);
+            if (count === 0) {
+                history.push(config.routes.POKEDEX_POKEMONS);
+                return;
+            } else {
+                setLoading(false);
+            }
         }
+    }, [currPage, data, history, limit, pokemonType]);
+
+    if (isFetching) {
+        return <PaginationList items={items} />;
+    }
+
+    if (!loading && data) {
+        const count = data.pokemon.length;
 
         // So that we can re-use `<PokemonsList>` component.
         const pokemonsList: PokemonsResultItem[] = data.pokemon.map(
@@ -57,20 +71,13 @@ export const PokemonsListByType: React.FC = () => {
 
         return (
             <>
-                {isFetching ? (
-                    <PaginationList items={items} />
-                ) : (
-                    <PokemonsList
-                        // Unlike `PokemonsListAll`, we retrieve the list of
-                        // all the pokemons at once instead of  pagination.
-                        // This helps us emulate a `pagination` behavior without
-                        // having to make extra API requests.
-                        pokemonsList={pokemonsList.slice(
-                            offset,
-                            offset + limit
-                        )}
-                    />
-                )}
+                <PokemonsList
+                    // Unlike `PokemonsListAll`, we retrieve the list of
+                    // all the pokemons at once instead of  pagination.
+                    // This helps us emulate a `pagination` behavior without
+                    // having to make extra API requests.
+                    pokemonsList={pokemonsList.slice(offset, offset + limit)}
+                />
 
                 <PaginationControl
                     page={currPage}
@@ -81,5 +88,5 @@ export const PokemonsListByType: React.FC = () => {
         );
     }
 
-    return <LoadingScreen />;
+    return <PaginationList items={items} />;
 };

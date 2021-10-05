@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-import { LoadingScreen } from '@/features/loading-screen';
 import { Title } from '@/components/title';
 import { PokeApiList, PokemonsResultItem } from '@/models/poke-api';
 import { config } from '@/utils/config';
@@ -61,5 +60,5 @@ export const PokemonsListAll: React.FC = () => {
         );
     }
 
-    return <LoadingScreen />;
+    return <PaginationList items={items} />;
 };

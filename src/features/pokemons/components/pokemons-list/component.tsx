@@ -11,7 +11,7 @@ interface Props {
 
 export const PokemonsList: React.FC<Props> = ({ pokemonsList }: Props) => {
     const items = pokemonsList.map((pokemon) => (
-        <PokemonsListCard name={pokemon.name} apiUrl={pokemon.url} />
+        <PokemonsListCard name={pokemon.name} />
     ));
 
     return <PaginationList items={items} />;
