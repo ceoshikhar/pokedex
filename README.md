@@ -18,6 +18,8 @@ Deployed and live at https://pokedex-edvora.netlify.app
 
 ### Things that could have been done better with more time
 
+-   Responsiveness.
+
 -   More code comments documentation. I have done my best to write comments where it's not abvious what the code does.
 
 -   More modular. I have done by best to make the components modular and small as possible.
