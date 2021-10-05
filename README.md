@@ -6,7 +6,7 @@ Deployed and live at https://pokedex-edvora.netlify.app
 
 `src/components` - React components that can be used anywhere in the application. They are independent of their usage.
 
-`src/features` - React components that have specific purpose. They are depened on their usage. This is what makes up our application.
+`src/features` - React components that have specific purpose. They depend on their usage. This is what makes up our application.
 
 `src/hooks` - Custom React hooks used across many features.
 
