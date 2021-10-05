@@ -11,7 +11,6 @@ import { PokemonTypesChip } from '@/features/pokemon/components/pokemon-types-ch
 import { FavoritesToggleButton } from '@/features/favorites/components/favorites-toggle-button';
 
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
-import { Chip } from '@mui/material';
 import { PokemonEvolutionChip } from '@/features/pokemon/components/pokemon-evolution-chip';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {

@@ -5,11 +5,7 @@ import { IconButtonProps } from '@mui/material/IconButton';
 
 import { IconHeart, IconHeartFill } from '@/components/icons';
 
-import {
-    addToFavorites,
-    checkIfFavorite,
-    removeFromFavorites,
-} from '../../storage';
+import { useFavoritesStore } from '../../use-favorites-store';
 
 interface Props extends IconButtonProps {
     pokemonName: string;
@@ -20,6 +16,11 @@ export const FavoritesToggleButton: React.FC<Props> = ({
     ...props
 }: Props) => {
     const theme = useTheme();
+    const {
+        checkIfFavorite,
+        addToFavorites,
+        removeFromFavorites,
+    } = useFavoritesStore();
 
     const [isFavorite, setIsFavorite] = useState(checkIfFavorite(pokemonName));
 
@@ -45,7 +46,7 @@ export const FavoritesToggleButton: React.FC<Props> = ({
 
     React.useEffect(() => {
         setIsFavorite(checkIfFavorite(pokemonName));
-    }, [pokemonName]);
+    }, [checkIfFavorite, pokemonName]);
 
     return (
         <IconButton

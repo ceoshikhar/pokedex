@@ -8,4 +8,5 @@ export const config = {
         POKEDEX_POKEMONS_WITH_TYPE_MATCH: '/pokedex/pokemons/type/:type',
         FAVORITES: '/favorites',
     },
+    titleSuffix: 'Pokédex',
 };

@@ -9,12 +9,16 @@ import { LoadingScreen } from '@/features/loading-screen';
 import { PokemonSearch } from '@/features/pokemon/components/pokemon-search';
 
 import { config } from '@/utils/config';
+import { useDocumentTitle } from '@/hooks/use-document-title';
 
 const Pokemons = lazy(() => import('@/features/pokemons'));
 const NotFound = lazy(() => import('@/features/not-found'));
 
 export const Pokedex: React.FC = () => {
     const theme = useTheme();
+
+    // Resetting to `Pokedex`
+    useDocumentTitle('');
 
     return (
         <>

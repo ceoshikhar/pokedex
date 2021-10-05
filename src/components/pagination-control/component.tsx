@@ -6,14 +6,14 @@ import { useListPagination } from '@/hooks/use-list-pagination';
 
 interface Props {
     count: number;
-    disabled: boolean;
     page: number;
+    disabled?: boolean;
 }
 
 export const PaginationControl: React.FC<Props> = ({
     count,
-    disabled,
     page,
+    disabled = false,
 }: Props) => {
     const { changePage } = useListPagination();
 

@@ -9,12 +9,15 @@ import { Pokemon as IPokemon } from '@/models/pokemon';
 
 import { PokemonCard } from './components/pokemon-card';
 import { PokemonSearch } from './components/pokemon-search/component';
+import { useDocumentTitle } from '@/hooks/use-document-title';
 
 export const Pokemon: React.FC = () => {
     const match = useRouteMatch<{ name: string }>(
         config.routes.POKEMON_WITH_NAME_MATCH
     );
     const pokemonName = match?.params.name || '';
+
+    useDocumentTitle(pokemonName || 'Pokémon');
 
     // Same query key is used in `PokemonCard` for caching
     const fetchPokemon = (name: string) =>
@@ -31,6 +34,7 @@ export const Pokemon: React.FC = () => {
 
     return (
         <>
+            <Title>Pokémon</Title>
             <PokemonSearch />
             {(isLoading || isFetching) && <LoadingScreen />}
             {isError && (
