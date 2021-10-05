@@ -24,14 +24,22 @@ export const Favorites: React.FC = () => {
                 <Subtitle>Pokémons that you love</Subtitle>
             </MainContainer>
 
-            <PokemonsList
-                pokemonNames={favorites.slice(offset, offset + limit)}
-            />
+            {count ? (
+                <>
+                    <PokemonsList
+                        pokemonNames={favorites.slice(offset, offset + limit)}
+                    />
 
-            <PaginationControl
-                page={currPage}
-                count={Math.ceil(count / limit)}
-            />
+                    <PaginationControl
+                        page={currPage}
+                        count={Math.ceil(count / limit)}
+                    />
+                </>
+            ) : (
+                <Title style={{ textAlign: 'center' }}>
+                    You have no favorite Pokémon 😞
+                </Title>
+            )}
         </>
     );
 };
