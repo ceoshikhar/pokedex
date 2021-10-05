@@ -56,9 +56,7 @@ export const App: React.FC = () => {
                                 <Route
                                     exact
                                     path={config.routes.POKEMON}
-                                    component={() => (
-                                        <h1>TODO: Pokemon with Search</h1>
-                                    )}
+                                    component={Pokemon}
                                 />
 
                                 <Route

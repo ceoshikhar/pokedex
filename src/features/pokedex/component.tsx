@@ -6,6 +6,7 @@ import { Title } from '@/components/title';
 import { Tooltip } from '@/components/tooltip';
 import { IconQuestion } from '@/components/icons';
 import { LoadingScreen } from '@/features/loading-screen';
+import { PokemonSearch } from '@/features/pokemon/components/pokemon-search';
 
 import { config } from '@/utils/config';
 
@@ -17,30 +18,34 @@ export const Pokedex: React.FC = () => {
 
     return (
         <>
-            <Title style={{ marginBottom: '2rem', position: 'relative' }}>
-                Pokédex
-                <Tooltip
-                    title={`The Pokédex (ポケモン図鑑; Pokemon Zukan; lit. "Illustrated
+            <div>
+                <Title style={{ position: 'relative' }}>
+                    Pokédex
+                    <Tooltip
+                        title={`The Pokédex (ポケモン図鑑; Pokemon Zukan; lit. "Illustrated
                 Pokémon Encyclopedia") is an electronic device designed to
                 catalogue and provide information regarding the various species
                 of Pokémon featured in the Pokémon video game, anime and manga
                 series.`}
-                    placement="bottom"
-                    style={{ fontSize: '0.8rem' }}
-                >
-                    <i>
-                        <IconQuestion
-                            size={16}
-                            color={theme.color.brightBlue}
-                            style={{
-                                position: 'absolute',
-                                top: '4px',
-                                marginLeft: '4px',
-                            }}
-                        />
-                    </i>
-                </Tooltip>
-            </Title>
+                        placement="bottom"
+                        style={{ fontSize: '0.8rem' }}
+                    >
+                        <i>
+                            <IconQuestion
+                                size={16}
+                                color={theme.color.brightBlue}
+                                style={{
+                                    position: 'absolute',
+                                    top: '4px',
+                                    marginLeft: '4px',
+                                }}
+                            />
+                        </i>
+                    </Tooltip>
+                </Title>
+
+                <PokemonSearch />
+            </div>
 
             <Suspense fallback={<LoadingScreen />}>
                 <Switch>

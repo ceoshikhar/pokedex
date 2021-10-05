@@ -8,6 +8,7 @@ import { LoadingScreen } from '@/features/loading-screen';
 import { Pokemon as IPokemon } from '@/models/pokemon';
 
 import { PokemonCard } from './components/pokemon-card';
+import { PokemonSearch } from './components/pokemon-search/component';
 
 export const Pokemon: React.FC = () => {
     const match = useRouteMatch<{ name: string }>(
@@ -21,25 +22,23 @@ export const Pokemon: React.FC = () => {
             res.json()
         );
 
-    const { data, isError, isLoading } = useQuery<IPokemon>(
+    const { data, isError, isLoading, isFetching } = useQuery<IPokemon | null>(
         `pokemon-${pokemonName}`,
-        () => fetchPokemon(pokemonName)
+        () => {
+            return pokemonName ? fetchPokemon(pokemonName) : null;
+        }
     );
 
-    // PokeApi returns 404 if no pokemon exists with `pokemonName`
-    if (isError) {
-        return (
-            <Title>{`No Pokemon found with the name "${pokemonName}"`}</Title>
-        );
-    }
-
-    if (isLoading) {
-        return <LoadingScreen />;
-    }
-
-    if (data) {
-        return <PokemonCard pokemon={data} />;
-    }
-
-    return null;
+    return (
+        <>
+            <PokemonSearch />
+            {(isLoading || isFetching) && <LoadingScreen />}
+            {isError && (
+                <Title
+                    style={{ textAlign: 'center' }}
+                >{`No Pokémon found with the name "${pokemonName}"`}</Title>
+            )}
+            {data && !isFetching && <PokemonCard pokemon={data} />}
+        </>
+    );
 };

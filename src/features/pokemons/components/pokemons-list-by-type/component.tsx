@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
@@ -8,12 +8,13 @@ import { useListPagination } from '@/hooks/use-list-pagination';
 import { config } from '@/utils/config';
 import { PaginationList } from '@/components/pagination-list';
 import { PaginationControl } from '@/components/pagination-control';
+import { upperCaseFirstLetter } from '@/utils/index';
+import { Title } from '@/components/title';
 
 import { PokemonsList } from '../pokemons-list';
 import { PokemonsListCardPlaceholder } from '../pokemons-list-card-placeholder';
 
 export const PokemonsListByType: React.FC = () => {
-    const [loading, setLoading] = useState(true);
     const history = useHistory();
     const pokemonType = usePokemonType();
     const { limit, currPage, offset } = useListPagination();
@@ -32,26 +33,22 @@ export const PokemonsListByType: React.FC = () => {
         .fill(0)
         .map(() => <PokemonsListCardPlaceholder />);
 
-    // For some `Pokemon Type`, PokeAPI returns no Pokemons.
-    useEffect(() => {
-        if (data) {
-            const count = data.pokemon.length;
-
-            if (count === 0) {
-                history.push(config.routes.POKEDEX_POKEMONS);
-                return;
-            } else {
-                setLoading(false);
-            }
-        }
-    }, [currPage, data, history, limit, pokemonType]);
-
     if (isFetching) {
         return <PaginationList items={items} />;
     }
 
-    if (!loading && data) {
+    if (data) {
         const count = data.pokemon.length;
+
+        if (!count && pokemonType) {
+            return (
+                <Title
+                    style={{ textAlign: 'center' }}
+                >{`No Pokémon found of type "${upperCaseFirstLetter(
+                    pokemonType
+                )}"`}</Title>
+            );
+        }
 
         // So that we can re-use `<PokemonsList>` component.
         const pokemonsList: PokemonsResultItem[] = data.pokemon.map(

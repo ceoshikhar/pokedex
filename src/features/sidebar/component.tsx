@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SidebarIcon } from './components/sidebar-icon';
+import { useHistory, useLocation } from 'react-router-dom';
+
 import { Tooltip } from '@/components/tooltip';
 import { IconFavorite, IconPokemon, IconPokemonText } from '@/components/icons';
-import { useHistory, useLocation } from 'react-router-dom';
 import { config } from '@/utils/config';
+
+import { SidebarIcon } from './components/sidebar-icon';
 
 export const Sidebar: React.FC = () => {
     const history = useHistory();
