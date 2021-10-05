@@ -18,7 +18,7 @@ Deployed and live at https://pokedex-edvora.netlify.app
 
 ### Things that could have been done better with more time
 
--   Responsiveness.
+-   Responsiveness. Please try to use a screen of at least 1366px in width.
 
 -   More code comments documentation. I have done my best to write comments where it's not abvious what the code does.
 
